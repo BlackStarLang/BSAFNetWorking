@@ -16,6 +16,8 @@
 		3056E4B721DC99E3008AEAF5 /* SQApiRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3056E4B121DC99E3008AEAF5 /* SQApiRequestManager.m */; };
 		3056E4B821DC99E3008AEAF5 /* SQNetStatusObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3056E4B521DC99E3008AEAF5 /* SQNetStatusObserver.m */; };
 		3056E4B921DC99E3008AEAF5 /* SQApiResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3056E4B621DC99E3008AEAF5 /* SQApiResponse.m */; };
+		3056E4BF21DCA8B5008AEAF5 /* SQBussinessResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3056E4BD21DCA8B5008AEAF5 /* SQBussinessResponse.m */; };
+		3056E4C021DCA8B5008AEAF5 /* SQBussinessApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3056E4BE21DCA8B5008AEAF5 /* SQBussinessApi.m */; };
 		938F0703199630102CBAA7DF /* libPods-BSAFNetWorking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B887C98B7BDA5B38C2BA3 /* libPods-BSAFNetWorking.a */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +38,10 @@
 		3056E4B421DC99E3008AEAF5 /* SQApiRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQApiRequestManager.h; sourceTree = "<group>"; };
 		3056E4B521DC99E3008AEAF5 /* SQNetStatusObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQNetStatusObserver.m; sourceTree = "<group>"; };
 		3056E4B621DC99E3008AEAF5 /* SQApiResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQApiResponse.m; sourceTree = "<group>"; };
+		3056E4BB21DCA8B4008AEAF5 /* SQBussinessApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQBussinessApi.h; sourceTree = "<group>"; };
+		3056E4BC21DCA8B4008AEAF5 /* SQBussinessResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQBussinessResponse.h; sourceTree = "<group>"; };
+		3056E4BD21DCA8B5008AEAF5 /* SQBussinessResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQBussinessResponse.m; sourceTree = "<group>"; };
+		3056E4BE21DCA8B5008AEAF5 /* SQBussinessApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQBussinessApi.m; sourceTree = "<group>"; };
 		4A178F09F3DCB4C027671C98 /* Pods-BSAFNetWorking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSAFNetWorking.release.xcconfig"; path = "Pods/Target Support Files/Pods-BSAFNetWorking/Pods-BSAFNetWorking.release.xcconfig"; sourceTree = "<group>"; };
 		5C99237D6EB31C274F580312 /* Pods-BSAFNetWorking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSAFNetWorking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BSAFNetWorking/Pods-BSAFNetWorking.debug.xcconfig"; sourceTree = "<group>"; };
 		FC9B887C98B7BDA5B38C2BA3 /* libPods-BSAFNetWorking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BSAFNetWorking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +80,7 @@
 		3056E49921DC995C008AEAF5 /* BSAFNetWorking */ = {
 			isa = PBXGroup;
 			children = (
+				3056E4BA21DCA8A6008AEAF5 /* BussinessApi */,
 				3056E4B021DC99E3008AEAF5 /* SQBaseApi */,
 				3056E49A21DC995C008AEAF5 /* AppDelegate.h */,
 				3056E49B21DC995C008AEAF5 /* AppDelegate.m */,
@@ -99,6 +106,17 @@
 				3056E4B521DC99E3008AEAF5 /* SQNetStatusObserver.m */,
 			);
 			path = SQBaseApi;
+			sourceTree = "<group>";
+		};
+		3056E4BA21DCA8A6008AEAF5 /* BussinessApi */ = {
+			isa = PBXGroup;
+			children = (
+				3056E4BB21DCA8B4008AEAF5 /* SQBussinessApi.h */,
+				3056E4BE21DCA8B5008AEAF5 /* SQBussinessApi.m */,
+				3056E4BC21DCA8B4008AEAF5 /* SQBussinessResponse.h */,
+				3056E4BD21DCA8B5008AEAF5 /* SQBussinessResponse.m */,
+			);
+			path = BussinessApi;
 			sourceTree = "<group>";
 		};
 		535800AD93E99E510261556C /* Frameworks */ = {
@@ -210,10 +228,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3056E4C021DCA8B5008AEAF5 /* SQBussinessApi.m in Sources */,
 				3056E49F21DC995C008AEAF5 /* ViewController.m in Sources */,
 				3056E4B821DC99E3008AEAF5 /* SQNetStatusObserver.m in Sources */,
 				3056E4AA21DC995E008AEAF5 /* main.m in Sources */,
 				3056E4B721DC99E3008AEAF5 /* SQApiRequestManager.m in Sources */,
+				3056E4BF21DCA8B5008AEAF5 /* SQBussinessResponse.m in Sources */,
 				3056E49C21DC995C008AEAF5 /* AppDelegate.m in Sources */,
 				3056E4B921DC99E3008AEAF5 /* SQApiResponse.m in Sources */,
 			);
@@ -361,7 +381,11 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BSAFNetWorking/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bs.app.BSAFNetWorking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -377,7 +401,11 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BSAFNetWorking/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bs.app.BSAFNetWorking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

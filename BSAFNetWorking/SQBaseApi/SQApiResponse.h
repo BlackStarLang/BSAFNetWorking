@@ -6,7 +6,7 @@
 //  Copyright © 2018年 SQBJ. All rights reserved.
 //
 
-#import "SQBaseModel.h"
+#import <UIKit/UIKit.h>
 
 
 /**
@@ -14,7 +14,7 @@
  
  网络请求成功 statusCode:200 时
  */
-@interface SQApiResponse : SQBaseModel
+@interface SQApiResponse : NSObject
 
 @property(nonatomic, strong) id responseObject;                // 返回原始数据
 
@@ -27,7 +27,7 @@
 /**
  网络请求成功 statusCode !=200 时
  */
-@interface SQApiResponseError : SQBaseModel
+@interface SQApiResponseError : NSObject
 
 @property(nonatomic, strong) NSError *SQError;                 // 请求错误模型
 @property(nonatomic, strong) NSDictionary *errorDic;           // 请求错误信息data解析

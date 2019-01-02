@@ -44,7 +44,6 @@ typedef void(^SQDownLoadCompleteBlock) (NSURL *filePath, NSError *error);   //�
 @property (nonatomic, assign) BOOL isBodyRequest;                           //是否是body体请求
 @property(nonatomic,strong) NSMutableDictionary *headerParam;               //请求头
 @property(nonatomic,copy) NSString *requestMethod;                          //请求方式
-//@property(nonatomic,assign) BOOL isSynchro;                                 //是否是同步请求，默认NO
 
 
 
