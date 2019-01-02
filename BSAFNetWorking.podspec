@@ -25,6 +25,8 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
+                    封装AFNetWorking 提供提供body体请求（setHTTPBody方式），提供表单格式方式请求（application/x-www-form-urlencoded）
+                    目前没有对上传、下载进行封装，后续会补充
                    DESC
 
   s.homepage     = "https://github.com/BlackStarLang/BSAFNetWorking.git"
@@ -132,6 +134,6 @@ Pod::Spec.new do |s|
   # s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "AFNetWorking", "~> 3.0"
+  s.dependency "AFNetworking", "~> 3.0"
 
 end
