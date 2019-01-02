@@ -18,9 +18,9 @@ Pod::Spec.new do |s|
 
   s.homepage        = "https://github.com/BlackStarLang/BSAFNetWorking.git"
   s.author          = { "BlackStar" => "blackstar_lang@163.com" }
-  s.ios.deployment_target = '8.0'
+  s.platform        = :ios, "8.0"
   s.source          = { :git => "https://github.com/BlackStarLang/BSAFNetWorking.git", :tag => "v0.0.1"}
-  s.source_files    = "BSAFNetWorking/BSAFNetWorking/SQBaseApi/**/*"
+  s.source_files    = "BSAFNetWorking/SQBaseApi/**/*.{h,m}"
   s.framework       = "UIKit"
   s.dependency "AFNetworking", "~> 3.0"
   s.license= { :type => "MIT", :file => "LICENSE" }
