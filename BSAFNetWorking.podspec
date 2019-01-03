@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "BSAFNetWorking"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "AFNetWorking changed BSAFNetWorking"
   s.description  = <<-DESC
                         封装AFNetWorking 提供提供body体请求（setHTTPBody方式），提供表单格式方式请求（application/x-www-form-urlencoded）
@@ -29,6 +29,6 @@ Pod::Spec.new do |s|
   s.subspec 'BSApi' do |ss|
     ss.source_files = "BSAFNetWorking/SQBaseApi/BSApi/*"
     ss.framework    = "UIKit"
-
+end
 
 end
