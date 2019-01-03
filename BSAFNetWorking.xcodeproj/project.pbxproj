@@ -42,6 +42,7 @@
 		3056E4BC21DCA8B4008AEAF5 /* SQBussinessResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQBussinessResponse.h; sourceTree = "<group>"; };
 		3056E4BD21DCA8B5008AEAF5 /* SQBussinessResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQBussinessResponse.m; sourceTree = "<group>"; };
 		3056E4BE21DCA8B5008AEAF5 /* SQBussinessApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQBussinessApi.m; sourceTree = "<group>"; };
+		3056E4C221DDB930008AEAF5 /* BSAFNetwroking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BSAFNetwroking.h; sourceTree = "<group>"; };
 		4A178F09F3DCB4C027671C98 /* Pods-BSAFNetWorking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSAFNetWorking.release.xcconfig"; path = "Pods/Target Support Files/Pods-BSAFNetWorking/Pods-BSAFNetWorking.release.xcconfig"; sourceTree = "<group>"; };
 		5C99237D6EB31C274F580312 /* Pods-BSAFNetWorking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSAFNetWorking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BSAFNetWorking/Pods-BSAFNetWorking.debug.xcconfig"; sourceTree = "<group>"; };
 		FC9B887C98B7BDA5B38C2BA3 /* libPods-BSAFNetWorking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BSAFNetWorking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,12 +99,8 @@
 		3056E4B021DC99E3008AEAF5 /* SQBaseApi */ = {
 			isa = PBXGroup;
 			children = (
-				3056E4B421DC99E3008AEAF5 /* SQApiRequestManager.h */,
-				3056E4B121DC99E3008AEAF5 /* SQApiRequestManager.m */,
-				3056E4B221DC99E3008AEAF5 /* SQApiResponse.h */,
-				3056E4B621DC99E3008AEAF5 /* SQApiResponse.m */,
-				3056E4B321DC99E3008AEAF5 /* SQNetStatusObserver.h */,
-				3056E4B521DC99E3008AEAF5 /* SQNetStatusObserver.m */,
+				3056E4C221DDB930008AEAF5 /* BSAFNetwroking.h */,
+				3056E4C121DDB89E008AEAF5 /* BSApi */,
 			);
 			path = SQBaseApi;
 			sourceTree = "<group>";
@@ -117,6 +114,19 @@
 				3056E4BD21DCA8B5008AEAF5 /* SQBussinessResponse.m */,
 			);
 			path = BussinessApi;
+			sourceTree = "<group>";
+		};
+		3056E4C121DDB89E008AEAF5 /* BSApi */ = {
+			isa = PBXGroup;
+			children = (
+				3056E4B421DC99E3008AEAF5 /* SQApiRequestManager.h */,
+				3056E4B121DC99E3008AEAF5 /* SQApiRequestManager.m */,
+				3056E4B221DC99E3008AEAF5 /* SQApiResponse.h */,
+				3056E4B621DC99E3008AEAF5 /* SQApiResponse.m */,
+				3056E4B321DC99E3008AEAF5 /* SQNetStatusObserver.h */,
+				3056E4B521DC99E3008AEAF5 /* SQNetStatusObserver.m */,
+			);
+			path = BSApi;
 			sourceTree = "<group>";
 		};
 		535800AD93E99E510261556C /* Frameworks */ = {

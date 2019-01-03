@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "SQApiRequestManager.h"
+#import "BSAFNetwroking.h"
 
 @interface ViewController ()
 
