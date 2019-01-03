@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "BSAFNetWorking"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "AFNetWorking changed BSAFNetWorking"
   s.description  = <<-DESC
                         封装AFNetWorking 提供提供body体请求（setHTTPBody方式），提供表单格式方式请求（application/x-www-form-urlencoded）
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.homepage        = "https://github.com/BlackStarLang/BSAFNetWorking.git"
   s.author          = { "BlackStar" => "blackstar_lang@163.com" }
   s.platform        = :ios, "8.0"
-  s.source          = { :git => "https://github.com/BlackStarLang/BSAFNetWorking.git", :tag => "v0.0.3"}
+  s.source          = { :git => "https://github.com/BlackStarLang/BSAFNetWorking.git", :tag => s.version}
   s.source_files    = "BSAFNetWorking/SQBaseApi/**/*"
   s.framework       = "UIKit"
   s.dependency "AFNetworking", "~> 3.0"
