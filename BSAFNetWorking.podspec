@@ -19,13 +19,16 @@ Pod::Spec.new do |s|
   s.homepage        = "https://github.com/BlackStarLang/BSAFNetWorking.git"
   s.author          = { "BlackStar" => "blackstar_lang@163.com" }
   s.platform        = :ios, "8.0"
-  s.source          = { :git => "https://github.com/BlackStarLang/BSAFNetWorking.git", :tag => s.version}
-  s.source_files    = "BSAFNetWorking/SQBaseApi/**/*"
+  s.source          = { :git => "https://github.com/BlackStarLang/BSAFNetWorking.git", :tag => s.version, :submodules => true}
+  s.source_files    = "BSAFNetWorking/SQBaseApi/BSAFNetwroking.h"
+  s.public_header_files    = "BSAFNetWorking/SQBaseApi/BSAFNetwroking.h"
   s.framework       = "UIKit"
   s.dependency "AFNetworking", "~> 3.0"
   s.license= { :type => "MIT", :file => "LICENSE" }
 
-  # s.requires_arc  = true
-  # s.xcconfig      = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
+  s.subspec 'BSApi' do |ss|
+    ss.source_files = "BSAFNetWorking/SQBaseApi/BSApi/*"
+    ss.framework    = "UIKit"
+
 
 end
