@@ -9,11 +9,11 @@
 Pod::Spec.new do |s|
 
   s.name         = "BSAFNetWorking"
-  s.version      = "0.0.4"
+  s.version      = "0.1.0"
   s.summary      = "AFNetWorking changed BSAFNetWorking"
   s.description  = <<-DESC
                         封装AFNetWorking 提供提供body体请求（setHTTPBody方式），提供表单格式方式请求（application/x-www-form-urlencoded）
-                        目前没有对上传、下载进行封装，后续会补充
+                        提供上传、下载、普通网络请求
                       DESC
 
   s.homepage        = "https://github.com/BlackStarLang/BSAFNetWorking.git"
