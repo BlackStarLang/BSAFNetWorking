@@ -7,7 +7,7 @@
 //
 
 #import "SQApiRequestManager.h"
-#import <UIProgressView+AFNetworking.h>
+#import <AFNetworking/UIProgressView+AFNetworking.h>
 
 @interface SQApiRequestManager ()
 
