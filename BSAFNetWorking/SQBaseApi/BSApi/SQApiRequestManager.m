@@ -7,13 +7,13 @@
 //
 
 #import "SQApiRequestManager.h"
+#import <UIProgressView+AFNetworking.h>
 
 @interface SQApiRequestManager ()
 
-@property (nonatomic,copy)NSString *url;
-@property (nonatomic,strong)NSDictionary *parameter;
-@property (nonatomic,strong)NSMutableURLRequest *currentRequest;        //当前请求的URLRequest
-
+@property (nonatomic,strong)NSMutableURLRequest *currentRequest;      //当前请求的URLRequest
+@property (nonatomic,copy)NSString *url;                              //请求url
+@property (nonatomic,strong)NSDictionary *parameter;                  //请求参数
 
 @end
 
@@ -44,7 +44,7 @@
         _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html",@"text/json", @"text/javascript",@"text/xml",@"multipart/form-data", nil];
 
         //参数全局接收
-        //对中文进行编码
+        //对URL进行UTF8编码处理中文
         NSString *encodeUrl = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)url,(CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]",NULL,kCFStringEncodingUTF8));
         self.url = encodeUrl;
         self.parameter = parameter;
@@ -52,11 +52,20 @@
         self.headerParam = [NSMutableDictionary dictionary];
         self.requestMethod = requestMethod;
         self.isBodyRequest = NO;
-        
-       
     }
     return self;
 }
+
+/**
+ 设置请求头
+ */
+-(void)setRequestHeader{
+    __weak typeof(self)weakSelf = self;
+    [self.headerParam enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [weakSelf.currentRequest setValue:weakSelf.headerParam[key] forHTTPHeaderField:key];
+    }];
+}
+
 
 -(void)startRequestWithSuccess:(SQApiSuccessBlock)successBlock failure:(SQApiFailureBlock)failure{
     
@@ -89,6 +98,8 @@
     }
 }
 
+#pragma mark - 发起普通网络请求
+
 -(void)startRequest{
 
     [self setRequestHeader];
@@ -120,20 +131,87 @@
     }]resume];
 }
 
+#pragma mark - 文件下载
 
-/**
- 设置请求头
- */
--(void)setRequestHeader{
+-(void)downloadTaskWithFilePath:(NSString *)filePath progress:(SQApiProgressBlock)progressBlock success:(SQApiSuccessBlock)successBlock failure:(SQApiFailureBlock)failure{
+    
+    if (!filePath || [filePath isEqualToString:@""]) {
+        NSLog(@"----------------文件保存路径不能为空----------------");
+        return;
+    }
+    
+    self.progressBlock = progressBlock;
+    _sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:self.url]];
+
     __weak typeof(self)weakSelf = self;
     [self.headerParam enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        [weakSelf.currentRequest setValue:weakSelf.headerParam[key] forHTTPHeaderField:key];
+        [request setValue:weakSelf.headerParam[key] forHTTPHeaderField:key];
+    }];
+    
+    NSURLSessionDownloadTask* downloadTask =[_sessionManager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            progressBlock(downloadProgress);
+        });
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+
+        return [NSURL fileURLWithPath:filePath isDirectory:NO];
+
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        if (!error) {
+            SQApiResponse *res = [SQApiResponse responseWithObject:response];
+            successBlock(res);
+        }else{
+            SQApiResponseError *responseError = [SQApiResponseError responseErrorWithError:error];
+            failure(responseError);
+        }
+    }];
+    
+    [downloadTask resume];
+}
+
+#pragma mark - 文件上传
+
+-(void)uploadTaskWithIdentifier:(NSString *)identifier filePath:(NSString *)filePath progress:(SQApiProgressBlock)progressBlock success:(SQApiSuccessBlock)successBlock failure:(SQApiFailureBlock)failure{
+    
+    NSURL *fileUrl = [NSURL URLWithString:filePath];
+    
+    [_sessionManager POST:self.url parameters:self.parameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileURL:fileUrl name:identifier error:nil];
+
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        progressBlock(uploadProgress);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        SQApiResponse *res = [SQApiResponse responseWithObject:responseObject];
+        successBlock(res);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        SQApiResponseError *responseError = [SQApiResponseError responseErrorWithError:error];
+        failure(responseError);
     }];
 }
 
+-(void)uploadTaskWithIdentifier:(NSString *)identifier fileData:(NSData *)fileData progress:(SQApiProgressBlock)progressBlock success:(SQApiSuccessBlock)successBlock failure:(SQApiFailureBlock)failure{
+    
+    [_sessionManager POST:self.url parameters:self.parameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        [formData appendPartWithFormData:fileData name:identifier];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        progressBlock(uploadProgress);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        SQApiResponse *res = [SQApiResponse responseWithObject:responseObject];
+        successBlock(res);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        SQApiResponseError *responseError = [SQApiResponseError responseErrorWithError:error];
+        failure(responseError);
+    }];
+    
+}
 
 
-#pragma mark 设置HTTPS证书验证
+#pragma mark - 设置HTTPS证书验证
 - (AFSecurityPolicy *)customSecurityPolicy{
     //先导入证书，找到证书的路径
     NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"证书名字" ofType:@"cer"];
@@ -141,17 +219,8 @@
     if (certData.length<=0) {
         return nil;
     }
-    //AFSSLPinningModeCertificate 使用证书验证模式
+
     AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
-    
-    //allowInvalidCertificates 是否允许无效证书（也就是自建的证书），默认为NO
-    //如果是需要验证自建证书，需要设置为YES
-    //securityPolicy.allowInvalidCertificates = YES;
-    
-    //validatesDomainName 是否需要验证域名，默认为YES；
-    //假如证书的域名与你请求的域名不一致，需把该项设置为NO；如设成NO的话，即服务器使用其他可信任机构颁发的证书，也可以建立连接，这个非常危险，建议打开。
-    //置为NO，主要用于这种情况：客户端请求的是子域名，而证书上的是另外一个域名。因为SSL证书上的域名是独立的，假如证书上注册的域名是www.google.com，那么mail.google.com是无法验证通过的；当然，有钱可以注册通配符的域名*.google.com，但这个还是比较贵的。
-    //如置为NO，建议自己添加对应域名的校验逻辑。
     securityPolicy.validatesDomainName = NO;
     NSSet *set = [[NSSet alloc] initWithObjects:certData, nil];
     securityPolicy.pinnedCertificates = set;

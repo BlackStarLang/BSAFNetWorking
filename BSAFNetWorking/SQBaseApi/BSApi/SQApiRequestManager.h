@@ -41,10 +41,9 @@ typedef void(^SQDownLoadCompleteBlock) (NSURL *filePath, NSError *error);   //�
 @property (nonatomic, readonly) AFHTTPSessionManager *sessionManager;
 
 //其他参数
-@property (nonatomic, assign) BOOL isBodyRequest;                           //是否是body体请求
-@property(nonatomic,strong) NSMutableDictionary *headerParam;               //请求头
-@property(nonatomic,copy) NSString *requestMethod;                          //请求方式
-
+@property (nonatomic, assign) BOOL isBodyRequest;                     //是否是body体请求
+@property(nonatomic,strong) NSMutableDictionary *headerParam;         //请求头
+@property(nonatomic,copy) NSString *requestMethod;                    //请求方式
 
 
 /**
@@ -70,5 +69,40 @@ typedef void(^SQDownLoadCompleteBlock) (NSURL *filePath, NSError *error);   //�
  @param failure 失败回调
  */
 -(void)startRequestWithSuccess:(SQApiSuccessBlock)successBlock failure:(SQApiFailureBlock)failure;
+
+
+
+/**
+ 下载文件请求
+
+ @param filePath 要下载到的路径，需要带有名称如：download/file/my.txt
+ @param progressBlock 下载进度
+ @param successBlock 下载成功回调
+ @param failure 下载失败回调
+ */
+-(void)downloadTaskWithFilePath:(NSString *)filePath progress:(SQApiProgressBlock)progressBlock success:(SQApiSuccessBlock)successBlock failure:(SQApiFailureBlock)failure;
+
+
+/**
+ 上传文件请求 filePath 方式
+
+ @param identifier 上传文件给后台的参数
+ @param filePath  需要上传文件的路径
+ @param progressBlock 上传进度
+ @param successBlock 上传成功回调
+ @param failure 上传失败回调
+ */
+-(void)uploadTaskWithIdentifier:(NSString *)identifier filePath:(NSString *)filePath progress:(SQApiProgressBlock)progressBlock success:(SQApiSuccessBlock)successBlock failure:(SQApiFailureBlock)failure;
+
+/**
+ 上传文件请求 data 方式
+ 
+ @param identifier 上传文件给后台的参数
+ @param fileData  需要上传文件的data
+ @param progressBlock 上传进度
+ @param successBlock 上传成功回调
+ @param failure 上传失败回调
+ */
+-(void)uploadTaskWithIdentifier:(NSString *)identifier fileData:(NSData *)fileData progress:(SQApiProgressBlock)progressBlock success:(SQApiSuccessBlock)successBlock failure:(SQApiFailureBlock)failure;
 
 @end
