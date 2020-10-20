@@ -1,3 +1,4 @@
+# 该代码仅用于测试、学习使用（ps:个人做第一个pod的测试样例), 代码功能不完善，写法规范度低
 # BSAFNetWorking
 对 AFNetWorking 进行封装 <br/>
 提供body体请求（setHTTPBody方式），提供表单格式方式请求（application/x-www-form-urlencoded） <br/>
